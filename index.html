@@ -1,0 +1,67 @@
+<html lang="en">
+
+    <head>
+        <link href="https://vjs.zencdn.net/7.11.4/video-js.css" rel="stylesheet" />
+      
+        <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
+        <!-- <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script> -->
+      </head>
+      
+      <body>
+        <!-- <video id="video"controls width="320" height="240" >
+          <source src="./test.mp4">
+        </video> -->
+        <!-- <audio src="./123test.mp3"></audio>
+        <button data-playing="false" role="switch" aria-checked="false">
+          <span>Play/Pause</span>
+        </button>
+        <div>
+          <input type="range" id="volume" min="0" max="2" value="1" step="0.01">
+          <input type="range" id="panner" min="-1" max="1" value="0" step="0.01">
+          <!-- <input type="file" id="file-input" /> -->
+        </div> -->
+        <div id="videowarpper">
+            
+        </div>
+        <!-- <script src="https://vjs.zencdn.net/7.11.4/video.min.js"></script> -->
+        <!-- <script>
+          var videoManager = document.querySelector('video');
+          if (window.MediaSource){
+            var mediaSource = new MediaSource();
+            videoManager.src = URL.createObjectURL(mediaSource);
+            mediaSource.addEventListener('sourceopen' ,sourceOpen);
+          }else{
+            console.log("The Media Source Extensions API is not supported.")
+          }
+
+          function sourceOpen(e) {
+            URL.revokeObjectURL(videoManager.src);
+            //codecs="avc1.64001e,mp4a.40.2"
+            var mime = 'video/mp4; codecs="avc1.42E01E"';
+            var mediaSource = e.target;
+            var sourceBuffer = mediaSource.addSourceBuffer(mime);
+            var videoUrl = '';
+            fetch("https://stream.popsww.com/streamingV2/request/index.m3u8?meta=sjMXlOxS~4EF-CMJ1Td45jticve3aEhghzOmBY1nSOsNVMQqGNwVRNbznT4118bzHoFSmubbZpvljsemP-mwaWd7_-GSalWugb2j3-ko7DYUQuwPpKR_fB1F33ge1Jz5T6OHSVyDlL1a_c_aGGHCzhtcpa0oZjqucq0APzvu95O7Rn5j70IBRyfYNfaGwyM-dLQNjj0e6Uijnr95uQWKXSCWGWOyc8X21HjqYy5fidQZNq-oVBkyaS-AQmNEvwhbeoGmDj_UN9srHuCTZTBvYLdfYiIBBB1lGPyuGQB44hfgFZ4RCuPur_o1YFrqKEEL_JXiG6xnzy8Lu5_9XXzeat_O6OOJBMtEjHHv-lIrLMRZkX9lzugZY2z4QAiC994mk8NKhtGR8yCQR_MnZR1NU8uBWQ2iHrEN8tAWYkkSwXfXebPmqtQFRyRLSPmfp4k1NTWQ1_fuErCl-8dcAkccJNwkE4SpQ1pFneB0I3l9r0dmB-yvcGDDDzVTXiQcs_drZILiMirA47ZX90Zg90yIxhLPIuhtBoMiHrBUt7q74e1f0gOo7H2IND_NCBihoRpeIFjDkIqg30bqth601NGLuW081wOEGlfWXfWcrKCICgbo3WDXufQFdY8m0qMuuqwNKMQJoo9BzRvqYBibzudXlRTs3DAvlfxJ1Kl1gRTnPXj_1-ezLL8PihVX0mBv9hplb6uZ3DEQsy2dO7WAffakQ14DRNFwXboAFJNhh0tpcJCaQJan3flDqwkRsop-BNNrulm3lzoeGO2_unPMM7dQU_OyE0iuG0taqAARmAZeyiOC3ZzON0M8qePQ1WSyzq-sL8m3oQmDSpd-BhW3VmBOY93Psa--oxbRl0m346UCpVxj0jxbrZuqXjjeg3CcQ1vcLG4CE0iscFtP0eySS5iV2ZoKR2IXJhsAeLjWQ32kTLtxHHY4rRdg=")
+              .then(function(response) {
+                return response.arrayBuffer();
+              })
+              .then(function(arrayBuffer) {
+                console.log(arrayBuffer);
+                sourceBuffer.addEventListener('updateend', function(e) {
+                  if (!sourceBuffer.updating && mediaSource.readyState === 'open') {
+                    mediaSource.endOfStream();
+                    videoManager.play();
+                   
+                    console.log(sourceBuffer);
+                  }
+                });
+                sourceBuffer.appendBuffer(arrayBuffer);
+              });
+          }
+
+        </script> -->
+        <script type="module" src="./index.js">
+        </script>
+      </body>
+
+</html>
