@@ -149,10 +149,10 @@ function App() {
       await transferFormat(TSbuffer);
 
       // Init buffer
-
+      //&& currentPreload < limitPreload
       buffer.addEventListener('updatestart', () =>{});
       buffer.addEventListener('updateend',async () => {
-        if (currentIdx < hlsParsed.segments.length && currentPreload < limitPreload){
+        if (currentIdx < hlsParsed.segments.length ){
           const uri = "https://vnw-vod-cdn.popsww.com/hn-wWlxuIBQdoM323jHTsJu72jGh3E/videos/transcoded/shippuden_274_app-popsapp/" + hlsParsed.segments[currentIdx].uri;
           res = await fetch(uri);
           const TSbuffer = await res.arrayBuffer();
@@ -160,6 +160,7 @@ function App() {
           await transferFormat(TSbuffer);
           currentIdx +=1;
           currentPreload+=1;
+          
         }else if (currentPreload >= limitPreload){
           console.log(currentPreload)
           currentPreload = 0;
