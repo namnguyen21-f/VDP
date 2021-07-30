@@ -14,7 +14,7 @@ function App() {
   var mediaSource = new MediaSource(); 
   let currentIdx = 1 , flag =0;
 
-  const limitPreload = 6;
+  const limitPreload = 4;
   let currentPreload = 0;
   
   const [progressWidth, setProgressWidth] = useState(null);
@@ -149,7 +149,7 @@ function App() {
       await transferFormat(TSbuffer);
 
       // Init buffer
-      //&& currentPreload < limitPreload
+      buffer.mode = 'segment';
       buffer.addEventListener('updatestart', () =>{});
       buffer.addEventListener('updateend',async () => {
         if (currentIdx < hlsParsed.segments.length ){
@@ -162,10 +162,8 @@ function App() {
           currentPreload+=1;
           
         }else if (currentPreload >= limitPreload){
-          console.log(currentPreload)
           currentPreload = 0;
-        }
-        else{
+        }else{
           mediaSource.endOfStream();
           const playPromise = videoRef.current.play();
           if (playPromise !== undefined) {
@@ -180,6 +178,28 @@ function App() {
                 // Show paused UI.
                 console.log("playback prevented");
               });
+          }
+        }
+      });
+
+      mediaSource.addEventListener('abort', () => {
+        console.error("mediaSource abort");
+      });
+
+      videoRef.current.addEventListener('seeking',async (event) => {
+        let tmp = 0;
+        await buffer.abort();
+        for (let i=0;i< hlsParsed.segments.length ;i++){
+          if (videoRef.current.currentTime < tmp ){
+            currentIdx = i - 1;
+            const uri = "https://vnw-vod-cdn.popsww.com/hn-wWlxuIBQdoM323jHTsJu72jGh3E/videos/transcoded/shippuden_274_app-popsapp/" + hlsParsed.segments[currentIdx].uri;
+            res = await fetch(uri);
+            const TSbuffer = await res.arrayBuffer();
+            buffer.timestampOffset = tmp - hlsParsed.segments[i].duration;
+            await transferFormat(TSbuffer);
+            break;
+          }else{
+            tmp += hlsParsed.segments[currentIdx].duration;
           }
         }
       });
