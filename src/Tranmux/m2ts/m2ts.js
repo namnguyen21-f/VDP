@@ -442,7 +442,7 @@ _ElementaryStream = function ElementaryStream() {
             codec: 'avc',
             type: 'video'
           });
-          console.log(event.tracks)
+          
         }
         if (programMapTable.audio !== null) {
           event.tracks.push({
